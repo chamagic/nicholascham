@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHC Magic | Moments of Wonder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Lora:ital,wght=0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="sitecss.css">
+    <style>
+        /* Responsive Design for Mobile Devices */
+        @media (max-width: 768px) {
+            nav { padding: 1.5rem 5%; flex-direction: column; gap: 1.5rem; }
+            .hero h1 { font-size: 2.2rem; }
+            .about-section { grid-template-columns: 1fr; gap: 2rem; margin: 4rem 5%; padding: 2rem; }
+            .about-image-placeholder { height: 300px; }
+            .portfolio-grid { grid-template-columns: 1fr; }
+            .contact-form { padding: 2rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo-area">
+            <strong>CHC</strong> MAGIC
+        </div>
+        <ul>
+            <li><a onclick="loadPage('home')">Home</a></li>
+            <li><a onclick="loadPage('bio')">My Bio</a></li>
+            <li><a onclick="loadPage('videos')">Videos</a></li>
+            <li><a onclick="loadPage('photos')">Photos</a></li>
+            <li><a onclick="loadPage('contact')">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main id="dynamic-body">
+    </main>
+
+    <footer>
+        <p>&copy; 2026 CHC Magic. Designed with intention and warmth.</p>
+    </footer>
+
+    <script>
+        // 1. Store your individual sections like puzzle pieces
+        const sections = {
+            hero: `
+                <section class="hero">
+                    
+                    <h1>Deceiving the eyes to open the mind.</h1>
+                    
+                    <div class="carousel-container">
+                        <img src="photos/Cover 1.jpg" alt="Featured Magic 1" class="carousel-slide active">
+                        <img src="photos/Cover 2.jpg" alt="Featured Magic 2" class="carousel-slide">
+                        <img src="photos/Cover 3.jpg" alt="Featured Magic 3" class="carousel-slide">
+                    </div>
+                    
+                    <p><a onclick="loadPage('contact')" class="cta-btn" style="cursor:pointer;">Share a Moment</a></p>
+                </section>
+            `,
+            // NEW CLIENT SHOWCASE PIECE
+            clients: `
+                <section class="clients-section">
+                    <h2 class="section-title">Trusted by Global Brands</h2>
+                    
+                    <div class="clients-grid">
+                        <img src="photos/logo/citibank.png" alt="Citi" class="client-logo">
+                        <img src="photos/logo/Charles Monat.png" alt="Swire" class="client-logo">
+                        <img src="photos/logo/ird.png" alt="UBS" class="client-logo" style="height:65px">
+                        <img src="photos/logo/tourismBoard.png" alt="Coca-Cola" class="client-logo" style="height:70px">
+                        <img src="photos/logo/3hk.png" alt="Coca-Cola" class="client-logo" style="height:70px">
+                        <img src="photos/logo/logoSquare.png" alt="Porsche" class="client-logo" style="height:100px">
+                        <img src="photos/logo/ssd new.png" alt="Sun Hung Kai Properties" class="client-logo" style="height:60px">
+                        <img src="photos/logo/hkps.png" alt="Fendi" class="client-logo" style="height:100px">
+                        <img src="photos/logo/yan oi tong.png" alt="Fendi" class="client-logo" style="height:100px">
+                        <img src="photos/logo/ming oi.png" alt="Fendi" class="client-logo" style="height:100px">
+                        <img src="photos/logo/TM hospital.png" alt="Fendi" class="client-logo" style="height:100px">
+                        <img src="photos/logo/yl.png" alt="Fendi" class="client-logo" style="height:100px">
+                    </div>
+                </section>
+            `,
+
+            bio: `
+                <section class="about-section">
+                    <!-- 
+                    <div class="about-image-placeholder">
+                        
+                        [ Warm, naturally lit photo of you or your deck here ]
+                    </div>
+                    -->
+                    <div class"about-image-placeholder">
+                        <img src="photos/bio.JPG" alt="bio" class="about-image">
+                    </div>
+                    <div class="about-content">
+                        <h2>My Bio</h2>
+                        <p>師承香港著名魔術師 Harry 哥哥,考獲「國際近景魔術專業文憑」優異獎，並於第三屆香港青年近景魔術大賽中獲得「優秀節目獎」。</p>
+                        <p>曾為多位香港名人演出，包括王君馨、鐘嘉欣等，累積多年舞台、近距離魔術及教學經驗，受到好評。擅長中距離及近距離互動魔術，著重即時互動與現場氣氛營造，根據不同活動性質及主題，度身設計魔術，為每個活動打造專屬且難忘的表演體驗。</p>
+                        <p>演出經驗涵蓋生日派對、私人聚會及公司活動等，同時亦曾為多間政府部門、大型機構及學校演出，包括﹕花旗銀行、稅務局、旅發局、香港青年協會、3香港、東華三院、港青基信學校等，具備豐富大型活動及專業場合演出經驗，能因應不同場合需要，提供具感染力的表演。</p>
+                        <h3 style="padding-bottom: 10px;">Achivements:</h3>
+                        <li>國際近景魔術專業文憑 - 優異獎</li>
+                        <li>第三屆香港青年近景魔術大賽 - 優秀節目獎</li>
+                        </div>
+                </section>
+            `,
+            videos: `
+                <section class="portfolio-section">
+                    <h2 class="section-title" style="text-transform: uppercase; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 1.8rem; letter-spacing: 1px;">Featured Videos</h2>
+                    
+                    <div class="video-grid">
+                        
+                                       
+                        <div class="video-item">
+                            <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/gj60OIgZX10?si=HJgCXDo2N9GgOPMX" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <p class="video-title">3HK Flagship Store performance</p>
+                        </div> 
+
+                        
+                        <div class="video-item">
+                            <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/SRlKQ22aP2I?si=5W9bxKDlyfpOehR3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <p class="video-title">Hong Kong Pacdisatric Society - Christmas Party show (Stage show)</p>
+                        </div>
+
+                        <div class="video-item">
+                            <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/qFtGbcJNgPQ?si=-y_6_N_XTl56bzWq" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <p class="video-title">Hong Kong Pacdisatric Society - Christmas Party show (Close up)</p>
+                        </div>
+
+                        <div class="video-item">
+                            <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/yUQVVnPW_hQ?si=Ucn9Bo6MVo925ArG" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <p class="video-title">Wedding magic show</p>
+                        </div>
+
+                        <div class="video-item">
+                            <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/alkS1vls_t4?si=E02cZwfaOmbKZ_1O" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <p class="video-title">Private party performance</p>
+                        </div>
+
+                        <div class="video-item">
+                            <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/C-Ho3N2O5LU?si=uPGqIBnLOVbZdltb" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <p class="video-title">Birthday Party Show</p>
+                        </div>
+
+                        <div class="video-item">
+                            <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/kJ4luGvaczc?si=X9C-Ycq46eHr2jSe" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <p class="video-title">Migician-in-residence in restaurant</p>
+                        </div>
+                        
+
+                        <div class="video-item">
+                            <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/nvW7g4E2G0M?si=885HgP-VgVJdm3KB" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <p class="video-title">Secondary School Show</p>
+                        </div>
+
+                        <div class="video-item">
+                            <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/euHOD8XNk3k?si=a_vNPUliEQU0PyAD" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <p class="video-title">Primary School Show</p>
+                        </div>
+                        
+                       
+                    </div>
+                </section>
+            `,
+            photos: `
+                <section class="portfolio-section">
+                    <h2 class="section-title" style="text-transform: uppercase; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 1.8rem; letter-spacing: 1px;">Featured Photos</h2>
+    
+                    <div class="photo-square-grid">
+                        <img src="photos/Cover 3.jpg" class="square-thumb" onclick="openPopup(this.src)" alt="Performance Highlights">
+                        <img src="photos/IMG_6055.jpg" class="square-thumb" onclick="openPopup(this.src)" alt="Performance Highlights">
+                        <img src="photos/IMG_8424.jpg" class="square-thumb" onclick="openPopup(this.src)" alt="Performance Highlights">                        
+                        <img src="photos/artist.png" class="square-thumb" onclick="openPopup(this.src)" alt="Performance Highlights">
+                        <img src="photos/IMG_0125.jpg" class="square-thumb" onclick="openPopup(this.src)" alt="Performance Highlights">
+                        <img src="photos/lion clubs.jpg" class="square-thumb" onclick="openPopup(this.src)" alt="Performance Highlights">
+                        <img src="photos/068.jpg" class="square-thumb" onclick="openPopup(this.src)" alt="Prop Architecture">
+                        <img src="photos/3hk.jpg" class="square-thumb" onclick="openPopup(this.src)" alt="The Five Senses">
+                        <img src="photos/DSC_6750.jpg" class="square-thumb" onclick="openPopup(this.src)" alt="Designing Intention">
+                        <img src="photos/DSC_6759.jpg" class="square-thumb" onclick="openPopup(this.src)" alt="Performance Highlights">
+                        <img src="photos/IMG_3948.jpg" class="square-thumb" onclick="openPopup(this.src)" alt="Prop Architecture">
+                        <img src="photos/Cover 2.jpg" class="square-thumb" onclick="openPopup(this.src)" alt="The Five Senses">
+                        <img src="photos/Selected_1.jpg" class="square-thumb" onclick="openPopup(this.src)" alt="Designing Intention">
+                        <img src="photos/wedding.png" class="square-thumb" onclick="openPopup(this.src)" alt="Performance Highlights">
+                        <img src="photos/IMG_6168.jpg" class="square-thumb" onclick="openPopup(this.src)" alt="Performance Highlights">                       
+                        <img src="photos/Cover 1.jpg" class="square-thumb" onclick="openPopup(this.src)" alt="Performance Highlights">
+                    </div>
+                </section>
+            `,
+            contact: `
+                <section class="contact-section">
+                    <h2 class="section-title">Let's Connect</h2>
+                    <p class="section-subtitle">Whether you want to collaborate on a custom project, book an intimate performance, or simply share a thought—drop a line below.</p>
+                    
+                    <div class="contact-form">
+                        <form action="mailto:nicholas.chamagic@gmail.com" method="POST" enctype="text/plain"; alert('Thank you for reaching out!');">
+                            <div class="form-group">
+                                <label for="name">YOUR NAME</label>
+                                <input type="text" id="name" name="name" required placeholder="Jane Doe">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">EMAIL ADDRESS</label>
+                                <input type="email" id="email" name="email" required placeholder="nicholas.chamagic@gmail.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="message">YOUR MESSAGE</label>
+                                <textarea id="message" name="message" rows="5" required placeholder="Tell me about your ideas..."></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Send Message</button>
+                        </form>
+                    </div>
+                </section>
+            `
+        };
+
+        // 2. Define what pieces go on which page
+        const pageContent = {
+            home: sections.hero + sections.clients + sections.bio + sections.videos + sections.photos + sections.contact,
+            bio: sections.bio,
+            videos: sections.videos,
+            photos: sections.photos,
+            contact: sections.contact
+        };
+
+        // NEW: Global tracker for the automated rotation loops
+        let carouselTimer = null;
+
+        function startCarousel() {
+            // Prevent duplicated stacks if clicked repeatedly
+            if (carouselTimer) clearInterval(carouselTimer);
+            
+            // Scan for the images matching your carousel template classes
+            const slides = document.querySelectorAll('.carousel-slide');
+            if (slides.length === 0) return; 
+            
+            let currentSlide = 0;
+
+            // Trigger the auto sliding interval rule
+            carouselTimer = setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000); // Transitions to a new photo every 4 seconds
+        }
+
+        // 3. The updated function that handles the smooth fade, swapping, and timer management
+        function loadPage(pageName) {
+            const bodyContainer = document.getElementById('dynamic-body');
+            
+            // Turn off carousel timer when leaving home page to maximize frame performance
+            if (carouselTimer) {
+                clearInterval(carouselTimer);
+                carouselTimer = null;
+            }
+            
+            bodyContainer.classList.add('fade-out');
+
+            setTimeout(() => {
+                bodyContainer.innerHTML = pageContent[pageName];
+                bodyContainer.classList.remove('fade-out');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                // If user returned to home page, restart the slideshow loops
+                if (pageName === 'home') {
+                    startCarousel();
+                }
+            }, 300);
+        }
+
+        // 4. Run this immediately when the website opens to load home page and kick off the slider loops
+        window.onload = function() {
+            document.getElementById('dynamic-body').innerHTML = pageContent.home;
+            startCarousel();
+        };
+    </script>
+
+    <div id="simpleModal" class="simple-modal" onclick="closePopup()">
+        <span class="modal-close">&times;</span>
+        <img id="modalTargetImg" src="" alt="Enlarged View">
+    </div>
+
+    <script>
+        // Minimal Pop-up Controller Functions
+        function openPopup(imageSrc) {
+            document.getElementById('modalTargetImg').src = imageSrc;
+            document.getElementById('simpleModal').style.display = 'flex';
+        }
+
+        function closePopup() {
+            document.getElementById('simpleModal').style.display = 'none';
+        }
+
+        // ... Your existing routing logic below stays exactly the same (loadPage, window.onload) ...
+        function loadPage(pageName) {
+            const bodyContainer = document.getElementById('dynamic-body');
+            if (carouselTimer) { clearInterval(carouselTimer); carouselTimer = null; }
+            bodyContainer.classList.add('fade-out');
+            setTimeout(() => {
+                bodyContainer.innerHTML = pageContent[pageName];
+                bodyContainer.classList.remove('fade-out');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                if (pageName === 'home') { startCarousel(); }
+            }, 300);
+        }
+
+        window.onload = function() {
+            document.getElementById('dynamic-body').innerHTML = pageContent.home;
+            startCarousel();
+        };
+    </script>
+</body>
+</html>
